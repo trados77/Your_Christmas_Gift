@@ -9,6 +9,10 @@
     <script src='main.js'></script>
 </head>
 <body>
+    <audio id="background-music" style="display:none;".
+        <source src="Valse.mp3" type="audio/mpeg">
+    </audio>
+    
   <canvas id="snow"></canvas>
 
   <div id="envelope">
@@ -112,7 +116,12 @@
       document.querySelector('#envelope h1').style.display='none';
       document.querySelector('#envelope p').style.display='none';
       document.getElementById('letter').style.display='block';
+
+        const music=document.getElementById('background-music');
+        music.volume=0.3;
+        music.play();
     });
 </script>
 </body>
+
 </html>

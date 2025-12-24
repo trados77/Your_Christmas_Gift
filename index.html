@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Christmas Gift</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+  <canvas id="snow"></canvas>
+
+  <div id="envelope">
+    <h1>My dear Mariam,</h1>
+    <h2><p>On this Christmas Eve, a small confession waits for you beneath the falling snow.</p></h2>
+    <button id="open-btn">Open Me</button>
+
+    <div class="letter-content" id="letter">    
+      <p>
+        On this Christmas Eve, when the world pretends to joy and light, I must speak what has<br>
+        long tormented me in the depths. I have this small place for you, not as a gift in<br>
+        the common sense, but as a confession, a cry from the soul that can no longer remain <br>
+        silent.
+      </p>
+      <hr>
+      <p>
+        You once told me that your heart belongs to another, though he dwells no longer <br>
+        among the living. I believed you them, and I believe you still. Yet knowing this has not <br>
+        extinguished what burns in me; it has only made it more acute, more sacred, more unbearable. <br>
+        <br>
+        I am in love with you. <br>
+        <br>
+        Not with the fleeting desire of youth, not with the wish to possess, but with that <br>
+        terrible, pure love which seizes a man and makes him both greater and more wretched <br>
+        than he was before. I fell in love with your voice before i ever saw your face, with the <br>
+        way you speak of your day as though offering a fragile treasure, with the kindness you <br>
+        show even when you believe no one deserves it. You have stolen my heart entirely, yet <br>
+        yours remains beyond my reach, guarded by a sorrow I both reverence and fear. <br>
+        <br>
+        When you call me handsome, when you share your nights and your laughter, I feel at <br>
+        once the highest joy and the sharpest pain, as if beauty itself were mocking me for <br>
+        daring to love what cannot be mine. And yet I do not withdraw. I cannot. For I have <br>
+        come to believe, perhaps in pride, perhaps in truth, that this love of mine might be the <br>
+        only force capable of redeeming us both: your sorrow and my own. <br>
+        <br>
+        I dream sometimes of a distant happiness, two suffering souls who have found in each <br>
+        other the only possible light. But I know this dream dwells only in the real of the <br>
+        impossible, like all true dreams. I do not ask you to leave the kingdom of your grief. I do <br>
+        not ask you to open a door you have closed. I ask nothing. <br>
+        <br>
+        I write only to bear witnessL such love exists in this world, rare, painful, pure. It exists <br>
+        in me for you, and it will continue to exist whether you answer or remain silent, whether <br>
+        you draw nearer or turn away forever. <br>
+        <br>
+        if silence is your reply, I will accept it. My soul will sorrow, yet it will also find peace in <br>
+        having spoken the unspeakable truth. <br>
+        <br>
+        Know only this: you have made a man feel, deeply and irrevocably, what it means to be <br>
+        alive in suffering and in exaltation. <br>
+        <br>
+        With all that I am, <br>
+        Hamdi <br>
+        Happy Christmas
+      </p>
+    </div>
+  </div>
+  <script>
+    const canvas = document.getElementById('snow');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const snowflakes = [];
+    const numFlakes = 150;
+
+    for (let i = 0; i < numFlakes; i++) {
+      snowflakes.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 4 + 1,
+        density: Math.random() + 1,
+        speed: Math.random() * 2 + 0.5
+      });
+    }
+
+    function drawSnow() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+      ctx.beginPath();
+      for (let flake of snowflakes) {
+        ctx.moveTo(flake.x, flake.y);
+        ctx.arc(flake.x, flake.y, flake.r, 0, Math.PI * 2);
+        flake.y += flake.speed * flake.density;
+        flake.x += Math.sin(flake.y / 50) * 0.5;
+        if (flake.y > canvas.height) flake.y = -10;
+        if (flake.x > canvas.width) flake.x = 0;
+        if (flake.x < 0) flake.x = canvas.width;
+      }
+      ctx.fill();
+      requestAnimationFrame(drawSnow);
+    }
+
+    drawSnow();
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+
+    document.getElementById('open-btn').addEventListener('click', function(){
+      this.style.display='none';
+      document.querySelector('#envelope h1').style.display='none';
+      document.querySelector('#envelope p').style.display='none';
+      document.getElementById('letter').style.display='block';
+    });
+</script>
+</body>
+</html>
